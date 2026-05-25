@@ -1,9 +1,7 @@
-import { drizzle } from "drizzle-orm/node-postgres";
-import pg from "pg";
+import { drizzle } from "drizzle-orm/neon-http";
+import { neon } from "@neondatabase/serverless";
 import * as schema from "./schema";
 import { env } from '$env/dynamic/private';
-
-const { Pool } = pg;
 
 const databaseUrl = env.DATABASE_URL || process.env.DATABASE_URL;
 
@@ -13,7 +11,7 @@ if (!databaseUrl) {
   );
 }
 
-export const pool = new Pool({ connectionString: databaseUrl });
-export const db = drizzle(pool, { schema });
+const sql = neon(databaseUrl);
+export const db = drizzle({ client: sql, schema });
 
 export * from "./schema";
