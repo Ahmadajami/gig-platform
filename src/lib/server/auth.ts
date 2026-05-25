@@ -5,6 +5,7 @@ export function simpleHash(password: string): string {
     hash = (hash << 5) - hash + char;
     hash = hash & hash;
   }
+  console.log('12345678',String(hash))
   return String(hash);
 }
 

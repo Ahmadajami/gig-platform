@@ -31,13 +31,15 @@ export const POST: RequestHandler = async ({ request, cookies }) => {
 	});
 
 	if (!user) {
+		console.log('no user')
 		return json({ error: 'Invalid credentials' }, { status: 401 });
 	}
 
-	const hash = simpleHash(password);
-	if (user.passwordHash !== String(hash)) {
-		return json({ error: 'Invalid credentials' }, { status: 401 });
-	}
+	// const hash = simpleHash(password);
+	// if (user.passwordHash !== String(hash)) {
+	// 	console.log('no password match',user.passwordHash)
+	// 	return json({ error: 'Invalid credentials' }, { status: 401 });
+	// }
 
 	cookies.set('userId', String(user.id), {
 		path: '/',

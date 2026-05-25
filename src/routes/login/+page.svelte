@@ -10,6 +10,11 @@
   let password = $state("");
   let loading = $state(false);
 
+  function fillDemo(p: string) {
+    phone = p;
+    password = "12345678";
+  }
+
   async function handleLogin() {
     loading = true;
     try {
@@ -26,41 +31,103 @@
   <div class="max-w-md w-full">
     <div class="bg-white rounded-2xl shadow-xl overflow-hidden">
       <div class="p-8 pb-0">
-        <div class="w-12 h-12 rounded-xl bg-primary flex items-center justify-center mb-6">
+        <div
+          class="w-12 h-12 rounded-xl bg-primary flex items-center justify-center mb-6"
+        >
           <span class="text-white font-bold text-xl">G</span>
         </div>
-        <h2 class="text-2xl font-bold text-foreground mb-1">{i18n.t("welcomeBack")}</h2>
+        <h2 class="text-2xl font-bold text-foreground mb-1">
+          {i18n.t("welcomeBack")}
+        </h2>
         <p class="text-muted-foreground">{i18n.t("loginToContinue")}</p>
       </div>
 
       <div class="p-8 space-y-4">
         <div class="space-y-1">
-          <label class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70" for="phone">{i18n.t("phoneNumber")}</label>
-          <Input id="phone" type="tel" placeholder="09xx xxx xxx" bind:value={phone} />
+          <label
+            class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+            for="phone">{i18n.t("phoneNumber")}</label
+          >
+          <Input
+            id="phone"
+            type="tel"
+            placeholder="09xx xxx xxx"
+            bind:value={phone}
+          />
         </div>
         <div class="space-y-1">
           <div class="flex items-center justify-between">
-            <label class="text-sm font-medium leading-none" for="password">{i18n.t("password")}</label>
+            <label class="text-sm font-medium leading-none" for="password"
+              >{i18n.t("password")}</label
+            >
           </div>
-          <Input id="password" type="password" placeholder="••••••••" bind:value={password} />
+          <Input
+            id="password"
+            type="password"
+            placeholder="••••••••"
+            bind:value={password}
+          />
         </div>
-        <Button class="w-full h-11 text-base font-semibold" onclick={handleLogin} disabled={loading}>
+        <Button
+          class="w-full h-11 text-base font-semibold"
+          onclick={handleLogin}
+          disabled={loading}
+        >
           {#if loading}
-            <span class="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin me-2"></span>
+            <span
+              class="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin me-2"
+            ></span>
           {/if}
           {i18n.t("login")}
         </Button>
+
+        <div class="pt-4 space-y-3">
+          <p
+            class="text-xs font-semibold text-muted-foreground uppercase tracking-wider"
+          >
+            Demo Accounts
+          </p>
+          <div class="grid grid-cols-1 gap-2">
+            <button
+              class="text-xs flex items-center justify-between p-2 px-3 rounded-lg border border-border hover:bg-muted/50 transition-colors"
+              onclick={() => fillDemo("0911111111")}
+            >
+              <span class="font-medium text-foreground">Super Admin</span>
+              <span class="text-muted-foreground">0911111111</span>
+            </button>
+            <button
+              class="text-xs flex items-center justify-between p-2 px-3 rounded-lg border border-border hover:bg-muted/50 transition-colors"
+              onclick={() => fillDemo("0922222222")}
+            >
+              <span class="font-medium text-foreground">Product Owner</span>
+              <span class="text-muted-foreground">0922222222</span>
+            </button>
+            <button
+              class="text-xs flex items-center justify-between p-2 px-3 rounded-lg border border-border hover:bg-muted/50 transition-colors"
+              onclick={() => fillDemo("0933333333")}
+            >
+              <span class="font-medium text-foreground">Sales Rep</span>
+              <span class="text-muted-foreground">0933333333</span>
+            </button>
+          </div>
+        </div>
       </div>
 
-      <div class="p-8 pt-0 flex justify-center border-t border-border/50 bg-muted/30 py-4">
-        <button class="text-sm text-muted-foreground hover:text-foreground" onclick={() => goto("/")}>
+      <div
+        class="p-8 pt-0 flex justify-center border-t border-border/50 bg-muted/30 py-4"
+      >
+        <button
+          class="text-sm text-muted-foreground hover:text-foreground"
+          onclick={() => goto("/")}
+        >
           {i18n.t("backToHome")}
         </button>
       </div>
     </div>
 
     <p class="text-center mt-6 text-sm text-sidebar-foreground/50">
-      &copy; {new Date().getFullYear()} {i18n.t("appName")}. All rights reserved.
+      &copy; {new Date().getFullYear()}
+      {i18n.t("appName")}. All rights reserved.
     </p>
   </div>
 </div>
